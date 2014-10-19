@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AULA</string>
+    <string name="action_settings">Configurações</string>
+    <string name="listadedecursos">Lista de Cursos cadastrados</string>
+    <string name="listadepredios">Lista de Prédios cadastrados</string>
+    <string name="site">aula.robugos.com</string>
+    <string name="carregando">Aguarde...</string>
+
+</resources>
