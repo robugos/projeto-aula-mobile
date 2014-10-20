@@ -10,5 +10,11 @@
         android:text="@string/listadedecursos"
         android:layout_centerInParent="true"/>
     
+    <!--<CheckBox
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:button="@drawable/star"/>-->
 
 </RelativeLayout>

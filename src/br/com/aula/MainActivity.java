@@ -7,6 +7,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -71,5 +73,10 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
+	
+	/*public void onToggleStar(View v){
+		ImageButton star = (ImageButton)findViewById(R.id.favorite);
+		star.setImageResource(R.drawable.button_on);
+	}*/
 
 }
