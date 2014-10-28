@@ -7,17 +7,17 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.ImageButton;
+/*import android.view.View;
+import android.widget.ImageButton;*/
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
-	private TabsPagerAdapter mAdapter;
+	private TabsPagerAdapter adapt;
 	private ActionBar actionBar;
 	// Título das Abas
-	private String[] tabs = { "Curso", "Prédio" };
+	private String[] abas = { "Curso", "Prédio" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +25,16 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 
 		// Inicialização
-		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager = (ViewPager) findViewById(R.id.rolagem);
 		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		adapt = new TabsPagerAdapter(getSupportFragmentManager());
 
-		viewPager.setAdapter(mAdapter);
+		viewPager.setAdapter(adapt);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
 
 		// Adiciona abas
-		for (String tab_name : tabs) {
+		for (String tab_name : abas) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));
 		}
