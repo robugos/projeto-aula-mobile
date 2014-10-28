@@ -1,12 +1,16 @@
 package br.com.aula.adapter;
 
-import br.com.aula.Curso;
-import br.com.aula.Predio;
+import br.com.aula.CursoFragment;
+import br.com.aula.PredioFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
+	
+	public static final CursoFragment CURSO = new CursoFragment();
+	public static final PredioFragment PREDIO = new PredioFragment();
+	public static final int NUM_ABAS = 2;
 
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -17,11 +21,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			// Curso fragment activity
-			return new Curso();
+			// fragment_curso
+			return CURSO;
 		case 1:
-			// Predio fragment activity
-			return new Predio();
+			// fragment_predio
+			return PREDIO;
 		}
 
 		return null;
@@ -30,7 +34,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// igual numero de abas
-		return 2;
+		return NUM_ABAS;
 	}
 
 }
