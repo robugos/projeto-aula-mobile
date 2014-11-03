@@ -21,17 +21,17 @@ public class PredioFragment extends Fragment {
 		Button button = (Button) view.findViewById(R.id.ceagri);
 		button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				chamaPredio();
+		//		chamaPredio();
 			} 
 		});
 		
 		return view;
 	}
 	
-	public void chamaPredio() {
+	/*public void chamaPredio() {
 		Intent entra = new Intent(getActivity(), PredioActivity.class);
 		entra.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(entra);
-	}
+	}*/
 
 }

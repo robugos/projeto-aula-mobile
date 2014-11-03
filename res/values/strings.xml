@@ -6,7 +6,7 @@
     <string name="listadedecursos">Lista de Cursos cadastrados</string>
     <string name="listadepredios">Lista de Prédios cadastrados</string>
     <string name="site">aula.robugos.com</string>
-    <string name="carregando">Aguarde&#8230;&#8230;&#8230;</string>
+    <string name="carregando">Aguarde&#8230;</string>
     <string name="listadehorarios">Lista de Horários cadastrados</string>
 
 </resources>
