@@ -2,14 +2,24 @@ package br.com.aula;
 
 public class Curso {
 	  
-	 String codCurso = null;
-	 String nome = null;
-	 boolean selected = false;
+	 private String codCurso = null;
+	 private String nome = null;
+	 private String turno = null;
+	 private boolean selected = false;
 	  
-	 public Curso(String codCurso, String nome, boolean selected) {
+	 public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
+	public Curso(String codCurso, String nome, String turno, boolean selected) {
 	  super();
 	  this.codCurso = codCurso;
 	  this.nome = nome;
+	  this.turno = turno;
 	  this.selected = selected;
 	 }
 	  
