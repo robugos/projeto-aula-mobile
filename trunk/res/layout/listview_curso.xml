@@ -4,23 +4,38 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="6dip" >
- 
+
     <CheckBox
         android:id="@+id/favoritar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="" />
- 
-    <TextView
-        android:id="@+id/codCurso"
-        android:layout_width="wrap_content"
+        android:focusableInTouchMode="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/favoritar"
-        android:layout_alignBottom="@+id/favoritar"
+        android:layout_alignTop="@+id/favoritar"
         android:layout_toRightOf="@+id/favoritar"
-        android:text="" />
- 
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp">
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome do Curso"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/turno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turno"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
 </RelativeLayout>

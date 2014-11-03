@@ -41,13 +41,13 @@ public class CursoFragment extends Fragment {
 
 		// Array de todos os cursos
 		ArrayList<Curso> cursoList = new ArrayList<Curso>(); 
-		Curso curso = new Curso("BSI", "Bach. Sistemas de Informação", false);
+		Curso curso = new Curso("BSI", "Bach. Sistemas de Informação", "Manhã", false);
 		cursoList.add(curso);
-		curso = new Curso("LC", "Lic. Computação", true);
+		curso = new Curso("LC", "Lic. Computação", "Noite", true);
 		cursoList.add(curso);
-		curso = new Curso("BCC", "Bach. Ciências da Computação", false);
+		curso = new Curso("BCC", "Bach. Ciências da Computação", "Tarde", false);
 		cursoList.add(curso);
-		curso = new Curso("ADM", "Administração", true);
+		curso = new Curso("ADM", "Administração", "Manhã", true);
 		cursoList.add(curso);
 
 		//
@@ -56,13 +56,13 @@ public class CursoFragment extends Fragment {
 		//
 		listView.setAdapter(dataAdapter);
 
-		/*listView.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Quando clica, mostra uma toast com o texto da TextView
 				Curso curso = (Curso) parent.getItemAtPosition(position);
 				Toast.makeText(getActivity().getApplicationContext(), "Clicou em " + curso.getNome(), Toast.LENGTH_LONG).show();
 			}
-		});*/
+		});
 
 	}
 
@@ -77,8 +77,9 @@ public class CursoFragment extends Fragment {
 		}
 
 		private class ViewHolder {
-			TextView codCurso;
-			CheckBox nome;
+			TextView nome;
+			TextView turno;
+			CheckBox favorito;
 		}
 
 		@Override
@@ -92,12 +93,13 @@ public class CursoFragment extends Fragment {
 				convertView = vi.inflate(R.layout.listview_curso, null);
 				
 				holder = new ViewHolder();
-				holder.codCurso = (TextView) convertView.findViewById(R.id.codCurso);
-				holder.nome = (CheckBox) convertView.findViewById(R.id.favoritar);
-				holder.nome.setButtonDrawable(R.drawable.star);
+				holder.nome = (TextView) convertView.findViewById(R.id.nome);
+				holder.turno = (TextView) convertView.findViewById(R.id.turno);
+				holder.favorito = (CheckBox) convertView.findViewById(R.id.favoritar);
+				holder.favorito.setButtonDrawable(R.drawable.star);
 				convertView.setTag(holder);
 
-				holder.nome.setOnClickListener(new View.OnClickListener() {
+				holder.favorito.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						CheckBox fav = (CheckBox) v;
 						Curso curso = (Curso) fav.getTag();
@@ -109,15 +111,17 @@ public class CursoFragment extends Fragment {
 						curso.setSelected(fav.isChecked());
 					}
 				});
+				
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			Curso curso = cursoList.get(position);
-			holder.codCurso.setText(" (" + curso.getCodCurso() + ")");
+			//holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(curso.getNome());
-			holder.nome.setChecked(curso.isSelected());
-			holder.nome.setTag(curso);
+			holder.turno.setText(curso.getTurno());
+			holder.favorito.setChecked(curso.isSelected());
+			holder.favorito.setTag(curso);
 
 			return convertView;
 
