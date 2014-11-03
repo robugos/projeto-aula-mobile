@@ -22,6 +22,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:
 			// fragment_curso
+			//CursoFragment.displayListView();
 			return CURSO;
 		case 1:
 			// fragment_predio

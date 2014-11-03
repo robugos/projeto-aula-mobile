@@ -4,6 +4,7 @@ import br.com.aula.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -18,11 +19,13 @@ public class MainActivity extends FragmentActivity implements
 	private ActionBar actionBar;
 	// Título das Abas
 	private String[] abas = { "Curso", "Prédio" };
+	private static Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		MainActivity.context = getApplicationContext();
 
 		// Inicialização
 		viewPager = (ViewPager) findViewById(R.id.rolagem);
@@ -78,5 +81,9 @@ public class MainActivity extends FragmentActivity implements
 		ImageButton star = (ImageButton)findViewById(R.id.favorite);
 		star.setImageResource(R.drawable.button_on);
 	}*/
+	
+	public static Context getAppContext() {
+        return MainActivity.context;
+    }
 
 }
