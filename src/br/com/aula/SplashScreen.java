@@ -1,5 +1,6 @@
 package br.com.aula;
  
+import br.com.aula.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +9,7 @@ import android.os.Handler;
 public class SplashScreen extends Activity {
  
     // Tempo da splash
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 1000;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 // Chama a Main quando acabar o tempo
-                Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }

@@ -5,8 +5,21 @@
     <string name="action_settings">Configurações</string>
     <string name="listadedecursos">Lista de Cursos cadastrados</string>
     <string name="listadepredios">Lista de Prédios cadastrados</string>
-    <string name="site">aula.robugos.com</string>
+    <string name="site">sites.google.com/site/projectaula/</string>
     <string name="carregando">Aguarde&#8230;</string>
     <string name="listadehorarios">Lista de Horários cadastrados</string>
+    <string name="title_activity_login">AULA - Login</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="logintv">Login</string>
+    <string name="senhatv">Senha</string>
+    <string name="loginbt">Entrar</string>
+    <string name="title_activity_cadastro"> AULA - Cadastro</string>
+    <string name="title_activity_predio">AULA - Prédio</string>
+    <string name="nometv">Nome</string>
+    <string name="senhaUsuariotv">Senha</string>
+    <string name="senhaConfirmatv">Confirmar senha</string>
+    <string name="emailtv">E-mail</string>
+    <string name="cadastrarbt">Cadastrar</string>
+    <string name="contaSair">Sair da Conta</string>
 
 </resources>
