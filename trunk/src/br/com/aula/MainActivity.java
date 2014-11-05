@@ -1,15 +1,24 @@
 package br.com.aula;
 
+import br.com.aula.R;
+import br.com.aula.R.id;
+import br.com.aula.R.layout;
+import br.com.aula.R.menu;
 import br.com.aula.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
+
 /*import android.view.View;
-import android.widget.ImageButton;*/
+ import android.widget.ImageButton;*/
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -19,13 +28,11 @@ public class MainActivity extends FragmentActivity implements
 	private ActionBar actionBar;
 	// Título das Abas
 	private String[] abas = { "Curso", "Prédio" };
-	private static Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		MainActivity.context = getApplicationContext();
 
 		// Inicialização
 		viewPager = (ViewPager) findViewById(R.id.rolagem);
@@ -34,7 +41,7 @@ public class MainActivity extends FragmentActivity implements
 
 		viewPager.setAdapter(adapt);
 		actionBar.setHomeButtonEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Adiciona abas
 		for (String tab_name : abas) {
@@ -76,14 +83,59 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
-	
-	/*public void onToggleStar(View v){
-		ImageButton star = (ImageButton)findViewById(R.id.favorite);
-		star.setImageResource(R.drawable.button_on);
-	}*/
-	
-	public static Context getAppContext() {
-        return MainActivity.context;
-    }
 
+	public void onBackPressed() {
+		new AlertDialog.Builder(this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setTitle("Fechar")
+				.setMessage("Tem certeza que deseja sair do AULA?")
+				.setPositiveButton("Sim",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								finish();
+							}
+
+						}).setNegativeButton("Não", null).show();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		switch (item.getItemId()) {
+		case R.id.login_sair:
+			desconectar();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	public void desconectar() {
+	
+		new AlertDialog.Builder(this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setTitle("Sair")
+				.setMessage("Tem certeza que deseja sair da sua conta?")
+				.setPositiveButton("Sim",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								startActivity(new Intent(MainActivity.this, LoginActivity.class));
+								finish();
+							}
+
+						}).setNegativeButton("Não", null).show();
+	}
 }

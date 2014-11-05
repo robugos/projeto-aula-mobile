@@ -3,8 +3,10 @@ package br.com.aula;
 import java.util.ArrayList;
 
 import br.com.aula.R;
-import br.com.aula.Curso;
+import br.com.aula.dominio.Curso;
+import br.com.aula.dominio.Predio;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -41,13 +43,13 @@ public class CursoFragment extends Fragment {
 
 		// Array de todos os cursos
 		ArrayList<Curso> cursoList = new ArrayList<Curso>(); 
-		Curso curso = new Curso("BSI", "Bach. Sistemas de Informação", "Manhã", false);
+		Curso curso = new Curso(1, "Bach. Sistemas de Informação", "Manhã", false);
 		cursoList.add(curso);
-		curso = new Curso("LC", "Lic. Computação", "Noite", true);
+		curso = new Curso(2, "Lic. Computação", "Noite", true);
 		cursoList.add(curso);
-		curso = new Curso("BCC", "Bach. Ciências da Computação", "Tarde", false);
+		curso = new Curso(3, "Bach. Ciências da Computação", "Tarde", false);
 		cursoList.add(curso);
-		curso = new Curso("ADM", "Administração", "Manhã", true);
+		curso = new Curso(4, "Administração", "Manhã", true);
 		cursoList.add(curso);
 
 		//
@@ -60,7 +62,8 @@ public class CursoFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Quando clica, mostra uma toast com o texto da TextView
 				Curso curso = (Curso) parent.getItemAtPosition(position);
-				Toast.makeText(getActivity().getApplicationContext(), "Clicou em " + curso.getNome(), Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity().getApplicationContext(), "Clicou em " + curso.getNome() + curso.getIdCurso(), Toast.LENGTH_LONG).show();
+				//chamaCurso(curso.getIdCurso());
 			}
 		});
 
@@ -104,9 +107,9 @@ public class CursoFragment extends Fragment {
 						CheckBox fav = (CheckBox) v;
 						Curso curso = (Curso) fav.getTag();
 						if (fav.isChecked() == true) {
-							Toast.makeText(getContext().getApplicationContext(), fav.getText() + " agora é um favorito.", Toast.LENGTH_LONG).show();	
+							Toast.makeText(getContext().getApplicationContext(), fav.getId() + " agora é um favorito.", Toast.LENGTH_LONG).show();	
 						}else{
-							Toast.makeText(getContext().getApplicationContext(), fav.getText() + " não é mais um favorito.", Toast.LENGTH_LONG).show();
+							Toast.makeText(getContext().getApplicationContext(), fav.getId() + " não é mais um favorito.", Toast.LENGTH_LONG).show();
 						}
 						curso.setSelected(fav.isChecked());
 					}
@@ -120,6 +123,7 @@ public class CursoFragment extends Fragment {
 			//holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(curso.getNome());
 			holder.turno.setText(curso.getTurno());
+			holder.favorito.setId(curso.getIdCurso());
 			holder.favorito.setChecked(curso.isSelected());
 			holder.favorito.setTag(curso);
 
@@ -127,6 +131,12 @@ public class CursoFragment extends Fragment {
 
 		}
 
+	}
+	
+	public void chamaCurso(int idCurso) {
+		startActivity(new Intent(getActivity(), PredioActivity.class));
+		PredioActivity predio = new PredioActivity();
+		predio.setIdCurso(idCurso);
 	}
 
 	// Mostrar todos os favoritos

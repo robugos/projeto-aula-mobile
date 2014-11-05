@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context="br.com.aula.LoginActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/loginet"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/logintv"
+            android:inputType="text" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/senhaet"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/senhatv"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/loginbt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/loginbt" />
+
+        <Button
+            android:id="@+id/cadastrobt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastrarbt" />
+
+    </LinearLayout>
+
+</RelativeLayout>
