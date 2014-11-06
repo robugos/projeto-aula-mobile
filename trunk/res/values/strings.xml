@@ -8,13 +8,13 @@
     <string name="site">sites.google.com/site/projectaula/</string>
     <string name="carregando">Aguarde&#8230;</string>
     <string name="listadehorarios">Lista de Horários cadastrados</string>
-    <string name="title_activity_login">AULA - Login</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_login">Login</string>
     <string name="logintv">Login</string>
     <string name="senhatv">Senha</string>
     <string name="loginbt">Entrar</string>
-    <string name="title_activity_cadastro"> AULA - Cadastro</string>
-    <string name="title_activity_predio">AULA - Prédio</string>
+    <string name="title_activity_cadastro">Cadastro</string>
+    <string name="title_activity_salas">Salas</string>
+    <string name="title_activity_disciplinas">Disciplinas</string>
     <string name="nometv">Nome</string>
     <string name="senhaUsuariotv">Senha</string>
     <string name="senhaConfirmatv">Confirmar senha</string>

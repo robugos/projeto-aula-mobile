@@ -95,35 +95,39 @@ public final class R {
         public static final int tab_unselected_pressed_aulayellow=0x7f020043;
     }
     public static final class id {
-        public static final int action_settings=0x7f090010;
+        public static final int action_settings=0x7f090012;
         public static final int cadastrarbt=0x7f090004;
-        public static final int cadastrobt=0x7f090009;
-        public static final int ceagri=0x7f09000c;
+        public static final int cadastrobt=0x7f09000a;
+        public static final int ceagri=0x7f09000d;
         public static final int emailet=0x7f090003;
-        public static final int favoritar=0x7f09000d;
-        public static final int idCurso=0x7f09000a;
-        public static final int listviewCurso=0x7f09000b;
-        public static final int login_sair=0x7f090011;
-        public static final int loginbt=0x7f090008;
-        public static final int loginet=0x7f090006;
-        public static final int nome=0x7f09000e;
+        public static final int favoritar=0x7f09000e;
+        public static final int idCurso=0x7f09000b;
+        public static final int listviewCurso=0x7f09000c;
+        public static final int listviewDisciplinas=0x7f090006;
+        public static final int login_sair=0x7f090013;
+        public static final int loginbt=0x7f090009;
+        public static final int loginet=0x7f090007;
+        public static final int nome=0x7f09000f;
         public static final int nomeet=0x7f090000;
+        public static final int professor=0x7f090011;
         public static final int rolagem=0x7f090005;
         public static final int senhaConfirmaet=0x7f090002;
         public static final int senhaUsuarioet=0x7f090001;
-        public static final int senhaet=0x7f090007;
-        public static final int turno=0x7f09000f;
+        public static final int senhaet=0x7f090008;
+        public static final int turno=0x7f090010;
     }
     public static final class layout {
         public static final int activity_cadastro=0x7f030000;
         public static final int activity_curso=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_main=0x7f030003;
-        public static final int activity_predio=0x7f030004;
-        public static final int activity_splash=0x7f030005;
-        public static final int fragment_curso=0x7f030006;
-        public static final int fragment_predio=0x7f030007;
-        public static final int listview_curso=0x7f030008;
+        public static final int activity_disciplinas=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_salas=0x7f030005;
+        public static final int activity_splash=0x7f030006;
+        public static final int fragment_curso=0x7f030007;
+        public static final int fragment_predio=0x7f030008;
+        public static final int listview_curso=0x7f030009;
+        public static final int listview_disciplina=0x7f03000a;
     }
     public static final class menu {
         public static final int cadastro=0x7f080000;
@@ -139,20 +143,20 @@ public final class R {
         public static final int carregando=0x7f060005;
         public static final int contaSair=0x7f060013;
         public static final int emailtv=0x7f060011;
-        public static final int hello_world=0x7f060008;
         public static final int listadedecursos=0x7f060002;
         public static final int listadehorarios=0x7f060006;
         public static final int listadepredios=0x7f060003;
-        public static final int loginbt=0x7f06000b;
-        public static final int logintv=0x7f060009;
+        public static final int loginbt=0x7f06000a;
+        public static final int logintv=0x7f060008;
         public static final int nometv=0x7f06000e;
         public static final int senhaConfirmatv=0x7f060010;
         public static final int senhaUsuariotv=0x7f06000f;
-        public static final int senhatv=0x7f06000a;
+        public static final int senhatv=0x7f060009;
         public static final int site=0x7f060004;
-        public static final int title_activity_cadastro=0x7f06000c;
+        public static final int title_activity_cadastro=0x7f06000b;
+        public static final int title_activity_disciplinas=0x7f06000d;
         public static final int title_activity_login=0x7f060007;
-        public static final int title_activity_predio=0x7f06000d;
+        public static final int title_activity_salas=0x7f06000c;
     }
     public static final class style {
         public static final int ActionBar_Solid_Aulayellow=0x7f070003;
