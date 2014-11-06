@@ -19,7 +19,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name="br.com.aula.SplashScreen"
+            android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -37,8 +37,15 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".PredioActivity"
-            android:label="@string/title_activity_predio" >
+            android:name=".DisciplinasActivity"
+            android:label="@string/title_activity_disciplinas" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".SalasActivity"
+            android:label="@string/title_activity_salas" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
