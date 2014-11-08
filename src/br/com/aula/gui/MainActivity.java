@@ -1,10 +1,5 @@
-package br.com.aula;
+package br.com.aula.gui;
 
-import br.com.aula.R;
-import br.com.aula.R.id;
-import br.com.aula.R.layout;
-import br.com.aula.R.menu;
-import br.com.aula.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
@@ -12,10 +7,12 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import br.com.aula.R;
 
 /*import android.view.View;
  import android.widget.ImageButton;*/
@@ -33,6 +30,9 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 
 		// Inicialização
 		viewPager = (ViewPager) findViewById(R.id.rolagem);
@@ -122,7 +122,7 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public void desconectar() {
-	
+
 		new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_info)
 				.setTitle("Sair")
@@ -132,7 +132,8 @@ public class MainActivity extends FragmentActivity implements
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								startActivity(new Intent(MainActivity.this, LoginActivity.class));
+								startActivity(new Intent(MainActivity.this,
+										LoginActivity.class));
 								finish();
 							}
 

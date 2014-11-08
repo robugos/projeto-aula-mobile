@@ -1,7 +1,5 @@
-package br.com.aula.adapter;
+package br.com.aula.gui;
 
-import br.com.aula.CursoFragment;
-import br.com.aula.PredioFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

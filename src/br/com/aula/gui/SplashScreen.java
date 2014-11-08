@@ -1,10 +1,10 @@
-package br.com.aula;
+package br.com.aula.gui;
  
-import br.com.aula.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import br.com.aula.R;
  
 public class SplashScreen extends Activity {
  

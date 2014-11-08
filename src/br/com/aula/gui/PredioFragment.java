@@ -1,14 +1,11 @@
-package br.com.aula;
+package br.com.aula.gui;
 
-import br.com.aula.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import br.com.aula.R;
 
 public class PredioFragment extends Fragment {
 
@@ -18,12 +15,6 @@ public class PredioFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_predio, container, false);
 		
-		Button button = (Button) view.findViewById(R.id.ceagri);
-		button.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-		//		chamaPredio();
-			} 
-		});
 		
 		return view;
 	}
