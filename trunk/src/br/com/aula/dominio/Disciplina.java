@@ -2,13 +2,13 @@ package br.com.aula.dominio;
 
 public class Disciplina {
 
-	private int id;
+	private String id;
 	private String nome;
 	private Curso curso;
 	private String professor;
 	private boolean selected = false;
 
-	public Disciplina(int id, String nome, Curso curso, String professor, boolean selected) {
+	public Disciplina(String id, String nome, Curso curso, String professor, boolean selected) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -17,10 +17,10 @@ public class Disciplina {
 		this.selected = selected;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNome() {

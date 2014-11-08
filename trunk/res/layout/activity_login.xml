@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    tools:context="br.com.aula.LoginActivity" >
+    tools:context="br.com.aula.gui.LoginActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -2,7 +2,7 @@ package br.com.aula.dominio;
 
 public class Curso {
 
-	private int idCurso;
+	private String idCurso;
 	private String nome;
 	private String departamento;
 	private String turno;
@@ -10,7 +10,7 @@ public class Curso {
 	private int quantPeriodos;
 	private boolean selected = false;
 
-	public Curso(int idCurso, String nome, String turno, boolean selected) {
+	public Curso(String idCurso, String nome, String turno, boolean selected) {
 		super();
 		this.idCurso = idCurso;
 		this.nome = nome;
@@ -18,11 +18,11 @@ public class Curso {
 		this.selected = selected;
 	}
 
-	public int getIdCurso() {
+	public String getIdCurso() {
 		return idCurso;
 	}
 
-	public void setIdCurso(int idCurso) {
+	public void setIdCurso(String idCurso) {
 		this.idCurso = idCurso;
 	}
 
