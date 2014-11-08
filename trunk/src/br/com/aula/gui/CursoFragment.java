@@ -1,4 +1,4 @@
-package br.com.aula;
+package br.com.aula.gui;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,8 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.aula.R;
+import br.com.aula.dao.ConexaoHttpClient;
 import br.com.aula.dominio.Curso;
 
 public class CursoFragment extends Fragment {
@@ -33,27 +35,40 @@ public class CursoFragment extends Fragment {
 		// View de todos os cursos
 		displayListView(principal);
 
-		// Mostrar todos os favoritos
-		// checkButtonClick(principal);
-
 		return principal;
 	}
 
 	private void displayListView(View view) {
 
-		// Array de todos os cursos
 		ArrayList<Curso> cursoList = new ArrayList<Curso>();
-		Curso curso = new Curso(1, "Bach. Sistemas de Informação", "Manhã",
-				false);
-		cursoList.add(curso);
-		curso = new Curso(2, "Lic. Computação", "Noite", true);
-		cursoList.add(curso);
-		curso = new Curso(3, "Bach. Ciências da Computação", "Tarde", false);
-		cursoList.add(curso);
-		curso = new Curso(4, "Administração", "Manhã", true);
-		cursoList.add(curso);
+		//CursoBS cursoBS = new CursoBS();
+		Log.i("resposta: ", "antes de strings[]");
+		String[] parts = pegarCursos().split(",");
+		Log.i("resposta: ", "depois de strings[]");
+		for (int i = 0; i < parts.length; i++) {
+			String[] c = parts[i].split("#");
+			String idCurso = c[0];
+			Log.i("resposta: ", idCurso);
+			String nome = c[1];
+			Log.i("resposta: ", nome);
+			String turno = c[2];
+			Log.i("resposta: ", turno);
+			Curso curso = new Curso(idCurso, nome, turno, false);
+			cursoList.add(curso);
+		}
+
+		// Array de todos os cursos
+		/*
+		 * Curso curso = new Curso(1, "Bach. Sistemas de Informação", "Manhã",
+		 * false); cursoList.add(curso); curso = new Curso(2, "Lic. Computação",
+		 * "Noite", true); cursoList.add(curso); curso = new Curso(3,
+		 * "Bach. Ciências da Computação", "Tarde", false);
+		 * cursoList.add(curso); curso = new Curso(4, "Administração", "Manhã",
+		 * true); cursoList.add(curso);
+		 */
 
 		//
+
 		dataAdapter = new ListAdapter(getActivity(), R.layout.listview_curso,
 				cursoList);
 		ListView listView = (ListView) view.findViewById(R.id.listviewCurso);
@@ -65,12 +80,33 @@ public class CursoFragment extends Fragment {
 					int position, long id) {
 				// Quando clica, mostra uma toast com o texto da TextView
 				Curso curso = (Curso) parent.getItemAtPosition(position);
-				Toast.makeText(getActivity().getApplicationContext(),
-						"Clicou em " + curso.getNome() + curso.getIdCurso(),
-						Toast.LENGTH_LONG).show();
+				//Toast.makeText(getActivity().getApplicationContext(),
+					//	"Clicou em " + curso.getNome() + curso.getIdCurso(),
+						//Toast.LENGTH_LONG).show();
 				chamaCurso(curso);
 			}
 		});
+
+	}
+
+	public String pegarCursos() {
+
+		String urlGet = "http://150.161.16.233:8080/Aulaweb/listarCursos.jsp";
+
+		String resposta = null;
+
+		try {
+			resposta = ConexaoHttpClient.executaHttpGet(urlGet);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("erro", " " + e);
+		}
+
+		// mensagemExibir("Login", respostaConvertida);
+
+		// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
+		return resposta;
 
 	}
 
@@ -137,7 +173,7 @@ public class CursoFragment extends Fragment {
 			// holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(curso.getNome());
 			holder.turno.setText(curso.getTurno());
-			holder.favorito.setId(curso.getIdCurso());
+			//holder.favorito.setId(Integer.parseInt(curso.getIdCurso()));
 			holder.favorito.setChecked(curso.isSelected());
 			holder.favorito.setTag(curso);
 
@@ -149,35 +185,11 @@ public class CursoFragment extends Fragment {
 
 	public void chamaCurso(Curso curso) {
 
-		Intent i = new Intent(getActivity(), DisciplinasActivity.class);
-		i.putExtra("idCurso", String.valueOf(curso.getIdCurso()));
+		Intent i = new Intent(getActivity().getApplicationContext(), DisciplinaActivity.class);
+		i.putExtra("idCurso", curso.getIdCurso());
 		i.putExtra("nome", curso.getNome());
 		i.putExtra("turno", curso.getTurno());
 		startActivity(i);
 	}
-
-	// Mostrar todos os favoritos
-	/*
-	 * private void checkButtonClick(View view) {
-	 * 
-	 * Button selecionados = (Button) view.findViewById(R.id.findSelected);
-	 * selecionados.setOnClickListener(new OnClickListener() {
-	 * 
-	 * @Override public void onClick(View v) {
-	 * 
-	 * StringBuffer responseText = new StringBuffer();
-	 * responseText.append("Os cursos abaixo estão selecionados\n");
-	 * 
-	 * ArrayList<Curso> cursoList = dataAdapter.cursoList; for (int i = 0; i <
-	 * cursoList.size(); i++) { Curso curso = cursoList.get(i); if
-	 * (curso.isSelected()) { responseText.append("\n" + curso.getNome()); } }
-	 * 
-	 * Toast.makeText(getActivity().getApplicationContext(), responseText,
-	 * Toast.LENGTH_LONG).show();
-	 * 
-	 * } });
-	 * 
-	 * }
-	 */
 
 }

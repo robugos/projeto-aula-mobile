@@ -1,4 +1,4 @@
-package br.com.aula;
+package br.com.aula.gui;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +21,12 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.aula.R;
+import br.com.aula.dao.ConexaoHttpClient;
 import br.com.aula.dominio.Curso;
 import br.com.aula.dominio.Disciplina;
 
-public class DisciplinasActivity extends Activity {
+public class DisciplinaActivity extends Activity {
 
 	public Curso curso;
 	public String idCurso, nome, turno;
@@ -32,14 +35,21 @@ public class DisciplinasActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_disciplinas);
+		setContentView(R.layout.activity_disciplina);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 
 		getValues();
-
 		setTitle(this.getTitle() + " - " + nome);
 
-		displayListView();
+		try {
+			displayListView();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -52,13 +62,23 @@ public class DisciplinasActivity extends Activity {
 
 	private void displayListView() {
 
-		// Array de todos as disciplinas
 		ArrayList<Disciplina> discList = new ArrayList<Disciplina>();
-		Disciplina disc = new Disciplina(1, "Paradigmas de programação", curso,
-				"Gabriel Alves", false);
-		discList.add(disc);
-
-		//
+		//CursoBS cursoBS = new CursoBS();
+		Log.i("resposta: ", "antes de strings[]");
+		String[] parts = pegarDisciplinas().split(",");
+		Log.i("resposta: ", "depois de strings[]");
+		for (int i = 0; i < parts.length; i++) {
+			String[] c = parts[i].split("#");
+			String id = c[0];
+			Log.i("resposta: ", idCurso);
+			String nome = c[1];
+			Log.i("resposta: ", nome);
+			String professor = c[2];
+			Log.i("resposta: ", professor);
+			Disciplina disc = new Disciplina(id, nome, curso, professor, false);
+			discList.add(disc);
+		}
+		
 		dataAdapter = new ListAdapter(this, R.layout.listview_disciplina,
 				discList);
 		ListView listView = (ListView) findViewById(R.id.listviewDisciplinas);
@@ -71,12 +91,33 @@ public class DisciplinasActivity extends Activity {
 				// Quando clica, mostra uma toast com o texto da TextView
 				Disciplina disc = (Disciplina) parent
 						.getItemAtPosition(position);
-				Toast.makeText(DisciplinasActivity.this,
+				Toast.makeText(DisciplinaActivity.this,
 						"Clicou em " + disc.getNome() + disc.getId(),
 						Toast.LENGTH_LONG).show();
 				// chamaCurso(curso);
 			}
 		});
+
+	}
+	
+	public String pegarDisciplinas() {
+
+		String urlGet = "http://150.161.16.233:8080/Aulaweb/listarDisciplinas.jsp?=idCurso="+curso.getIdCurso();
+
+		String resposta = null;
+
+		try {
+			resposta = ConexaoHttpClient.executaHttpGet(urlGet);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("erro", " " + e);
+		}
+
+		// mensagemExibir("Login", respostaConvertida);
+
+		// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
+		return resposta;
 
 	}
 
@@ -104,7 +145,7 @@ public class DisciplinasActivity extends Activity {
 			Log.v("ConvertView", String.valueOf(position));
 
 			if (convertView == null) {
-				LayoutInflater vi = (LayoutInflater) DisciplinasActivity.this
+				LayoutInflater vi = (LayoutInflater) DisciplinaActivity.this
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = vi.inflate(R.layout.listview_disciplina, null);
 
@@ -122,11 +163,11 @@ public class DisciplinasActivity extends Activity {
 						CheckBox fav = (CheckBox) v;
 						Disciplina disc = (Disciplina) fav.getTag();
 						if (fav.isChecked() == true) {
-							Toast.makeText(DisciplinasActivity.this,
+							Toast.makeText(DisciplinaActivity.this,
 									fav.getId() + " agora é um favorito.",
 									Toast.LENGTH_LONG).show();
 						} else {
-							Toast.makeText(DisciplinasActivity.this,
+							Toast.makeText(DisciplinaActivity.this,
 									fav.getId() + " não é mais um favorito.",
 									Toast.LENGTH_LONG).show();
 						}
@@ -142,7 +183,7 @@ public class DisciplinasActivity extends Activity {
 			// holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(disc.getNome());
 			holder.professor.setText(disc.getProfessor());
-			holder.favorito.setId(disc.getId());
+			//holder.favorito.setId(disc.getId());
 			holder.favorito.setChecked(disc.isSelected());
 			holder.favorito.setTag(disc);
 

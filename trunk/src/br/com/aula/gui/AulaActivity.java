@@ -1,17 +1,18 @@
-package br.com.aula;
+package br.com.aula.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import br.com.aula.R;
 
-public class SalasActivity extends Activity {
+public class AulaActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_salas);
+		setContentView(R.layout.activity_sala);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
