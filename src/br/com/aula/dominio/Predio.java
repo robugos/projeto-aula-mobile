@@ -9,6 +9,9 @@ public class Predio {
 	private String quantAndar;
 	private String observacao;
 	
+	public Predio(int id, String nome, String quantAndar, boolean b) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}

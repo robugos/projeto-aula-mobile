@@ -19,7 +19,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name=".SplashScreen"
+            android:name="br.com.aula.gui.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -32,36 +32,36 @@
 
         <!-- Main activity -->
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
-            android:name=".DisciplinasActivity"
-            android:label="@string/title_activity_disciplinas" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity
-            android:name=".SalasActivity"
-            android:label="@string/title_activity_salas" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity
-            android:name=".LoginActivity"
+            android:name="br.com.aula.gui.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".CadastroActivity"
+            android:name="br.com.aula.gui.CadastroActivity"
             android:label="@string/title_activity_cadastro"
             android:windowSoftInputMode="adjustResize" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
+                android:value="br.com.aula.gui.LoginActivity" />
+        </activity>
+        <activity
+            android:name="br.com.aula.gui.MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="br.com.aula.gui.DisiplinaActivity"
+            android:label="@string/title_activity_disciplinas" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.aula.gui.MainActivity" />
+        </activity>
+        <activity
+            android:name="br.com.aula.gui.SalaActivity"
+            android:label="@string/title_activity_salas" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.aula.gui.MainActivity" />
         </activity>
     </application>
 
