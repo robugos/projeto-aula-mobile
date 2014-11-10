@@ -4,18 +4,19 @@ package br.com.aula.dominio;
 
 public class Predio {
 	
-	private int id;
+	private String id;
 	private String nome;
 	private String quantAndar;
 	private String observacao;
+	private boolean selected;
 	
-	public Predio(int id, String nome, String quantAndar, boolean b) {
+	public Predio(String id, String nome, String quantAndar, boolean selected) {
 		// TODO Auto-generated constructor stub
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -37,5 +38,12 @@ public class Predio {
 		this.observacao = observacao;
 	}
 	
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
 }

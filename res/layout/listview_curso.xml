@@ -18,7 +18,7 @@
         android:layout_alignTop="@+id/favoritar"
         android:layout_toRightOf="@+id/favoritar"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="4dp">
 
         <TextView

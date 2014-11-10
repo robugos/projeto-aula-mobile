@@ -1,5 +1,6 @@
 package br.com.aula.dominio;
 
+
 public class CursoFavorito {
 	
 	private int id;

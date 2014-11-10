@@ -25,6 +25,14 @@ public class Curso {
 	public void setIdCurso(String idCurso) {
 		this.idCurso = idCurso;
 	}
+	
+	public int getIntIdCurso() {
+		return Integer.parseInt(idCurso);
+	}
+	
+	public void setIntIdCurso(int id) {
+		this.idCurso = String.valueOf(id);
+	}
 
 	public String getNome() {
 		return nome;

@@ -25,7 +25,7 @@
             android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome da Discplina"
+            android:text="Nome da Aula"
             android:textSize="18sp"
             android:textStyle="bold" />
         

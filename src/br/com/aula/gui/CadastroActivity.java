@@ -1,11 +1,7 @@
 package br.com.aula.gui;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,15 +9,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import br.com.aula.R;
-import br.com.aula.dao.ConexaoHttpClient;
+import br.com.aula.negocio.CadastroBS;
 
 public class CadastroActivity extends Activity {
 	
@@ -65,7 +59,15 @@ public class CadastroActivity extends Activity {
 				mensagemExibir("Atenção", "O email informado não é válido");
 
 			} else {
-				cadastrar();
+				String email = emailEt.getText().toString();
+				String nome = nomeEt.getText().toString();
+				String senha = senhaEt.getText().toString();
+				CadastroBS cadastro = new CadastroBS();
+				if (cadastro.cadastrar(email, nome, senha).equals("1")) {
+					chamaLogin();
+
+				}else 
+					mensagemExibir("Erro", "Usuário não cadastrado");
 			}
 	}
 	
@@ -89,37 +91,6 @@ public class CadastroActivity extends Activity {
 		}
 		
 		return retorno;
-	}
-	
-	public void cadastrar () {
-		String urlPost ="http://150.161.16.233:8080/Aulaweb/cadastroUsuario.jsp"; //implementar com url em jsp
-		//String urlGet = "http://150.161.16.233:8080/Aulaweb/login.jsp?email="+nomeEt.getText().toString()
-			//	+"&senha="+senhaEt.getText().toString();
-	 //implementar com url em jsp
-		ArrayList <NameValuePair> parametrosPost = new ArrayList <NameValuePair>();
-		parametrosPost.add(new BasicNameValuePair("email", emailEt.getText().toString()));
-		parametrosPost.add(new BasicNameValuePair("nome", nomeEt.getText().toString()));
-		parametrosPost.add(new BasicNameValuePair("senha", senhaEt.getText().toString()));
-		String resposta = null;
-		Log.i("logar : ", "vai entrar no try");
-
-		try {
-			resposta = ConexaoHttpClient.executaHttpPost(urlPost, parametrosPost);
-			String respostaConvertida = resposta.toString();
-			respostaConvertida = respostaConvertida.replaceAll("\\s+","");
-			Log.i("resposta: ", respostaConvertida);
-			
-			if (respostaConvertida.equals("1")) {
-				//mensagemExibir("Sucesso", "Usuário cadastrado!");
-				chamaLogin();
-
-			}else 
-				mensagemExibir("Erro", "Usuário não cadastrado");
-			
-		}catch (Exception ex) {
-			Log.i("erro"," "+ex);
-			Toast.makeText(CadastroActivity.this, "Erro :"+ex,Toast.LENGTH_LONG);
-		}
 	}
 	
 	public void chamaLogin() {

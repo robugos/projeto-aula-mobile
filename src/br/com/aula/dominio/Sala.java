@@ -1,18 +1,34 @@
 package br.com.aula.dominio;
 
+
 public class Sala {
 	
 	public Sala(int id, String numero, String andar, Predio pedrio, boolean b) {
 		// TODO Auto-generated constructor stub
 	}
-	private int id;
+	private String id;
 	private String numero;
 	private String tipo;
 	private String andar;
-	public int getId() {
+	private String obsevacao;
+	private Predio predio;
+	private boolean selected;
+	
+	public Sala(String id, String numero, String tipo, String andar, Predio predio, String observacao, boolean selected) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.tipo = tipo;
+		this.andar = andar;
+		this.predio = predio;
+		this.obsevacao = observacao;
+		this.selected = selected;
+	}
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNumero() {
@@ -45,8 +61,14 @@ public class Sala {
 	public void setPredio(Predio predio) {
 		this.predio = predio;
 	}
-	private String obsevacao;
-	private Predio predio;
+	
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 	
 
 }
