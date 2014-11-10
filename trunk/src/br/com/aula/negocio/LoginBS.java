@@ -5,16 +5,42 @@ import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 import br.com.aula.dao.ConexaoHttpClient;
-import br.com.aula.dominio.Curso;
-import br.com.aula.gui.LoginActivity;
-import br.com.aula.gui.MainActivity;
 
 public class LoginBS {
 	
-	private LoginActivity loginActivity;
+	public String conectaLogin(String login, String senha) {
+
+		String urlPost = "http://150.161.16.233:8080/Aulaweb/login.jsp"; // implementarcom url em jsp
+		/*String urlGet = "http://150.161.16.233:8080/Aulaweb/login.jsp?nome="
+				+ login
+				+ "&senha="
+				+ senha;*/
+		// implementar com url em jsp
+		ArrayList<NameValuePair> parametrosPost = new ArrayList<NameValuePair>();
+		parametrosPost.add(new BasicNameValuePair("nome", login));
+		parametrosPost.add(new BasicNameValuePair("senha", senha));
+		String resposta = null;
+		Log.i("logar : ", "vai entrar no try");
+
+		try {
+			resposta = ConexaoHttpClient.executaHttpPost(urlPost,
+					parametrosPost);
+			String respostaConvertida = resposta.toString();
+			respostaConvertida = respostaConvertida.replaceAll("\\s+",
+					"");
+			Log.i("resposta: ", respostaConvertida);
+
+			// mensagemExibir("Login", respostaConvertida);
+			
+			resposta = respostaConvertida;
+
+		} catch (Exception ex) {
+			Log.i("erro", " " + ex);
+		}
+		return resposta;
+
+	}
 
 }

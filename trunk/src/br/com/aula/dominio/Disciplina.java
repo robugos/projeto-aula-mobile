@@ -23,6 +23,15 @@ public class Disciplina {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public int getIntId() {
+		return Integer.parseInt(id);
+	}
+	
+	public void setIntId(int id) {
+		this.id = String.valueOf(id);
+	}
+	
 	public String getNome() {
 		return nome;
 	}

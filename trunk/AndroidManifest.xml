@@ -50,7 +50,7 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="br.com.aula.gui.DisiplinaActivity"
+            android:name="br.com.aula.gui.DisciplinaActivity"
             android:label="@string/title_activity_disciplinas" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

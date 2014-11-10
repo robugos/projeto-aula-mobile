@@ -1,26 +1,18 @@
 package br.com.aula.gui;
 
-import java.util.ArrayList;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import br.com.aula.R;
-import br.com.aula.dao.ConexaoHttpClient;
 import br.com.aula.negocio.LoginBS;
 
 @SuppressLint("ShowToast")
@@ -70,52 +62,20 @@ public class LoginActivity extends Activity {
 				}else{
 					String login = loginEt.getText().toString();
 					String senha = senhaEt.getText().toString();
-					conectaLogin(login, senha);
+					LoginBS loginBS = new LoginBS();
+					
+					if (loginBS.conectaLogin(login, senha).equals("1")) {
+						// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
+						startActivity(new Intent(LoginActivity.this,
+								MainActivity.class));
+						finish();
+
+					} else
+						mensagemExibir("Login", "Usuário inválido");
 				}
 
 			}
 		});
-	}
-	
-	public void conectaLogin(String login, String senha) {
-
-		String urlPost = "http://150.161.16.233:8080/Aulaweb/login.jsp"; // implementarcom url em jsp
-		String urlGet = "http://150.161.16.233:8080/Aulaweb/login.jsp?nome="
-				+ login
-				+ "&senha="
-				+ senha;
-		// implementar com url em jsp
-		ArrayList<NameValuePair> parametrosPost = new ArrayList<NameValuePair>();
-		parametrosPost.add(new BasicNameValuePair("nome", login));
-		parametrosPost.add(new BasicNameValuePair("senha", senha));
-		String resposta = null;
-		Log.i("logar : ", "vai entrar no try");
-
-		try {
-			resposta = ConexaoHttpClient.executaHttpPost(urlPost,
-					parametrosPost);
-			String respostaConvertida = resposta.toString();
-			respostaConvertida = respostaConvertida.replaceAll("\\s+",
-					"");
-			Log.i("resposta: ", respostaConvertida);
-
-			// mensagemExibir("Login", respostaConvertida);
-
-			if (respostaConvertida.equals("1")) {
-				// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
-				startActivity(new Intent(this,
-						MainActivity.class));
-				finish();
-
-			} else
-				mensagemExibir("Login", "Usuário inválido");
-
-		} catch (Exception ex) {
-			Log.i("erro", " " + ex);
-			Toast.makeText(this, "Erro :" + ex,
-					Toast.LENGTH_LONG);
-		}
-
 	}
 
 	public void mensagemExibir(String titulo, String texto) {

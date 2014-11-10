@@ -2,7 +2,15 @@ package br.com.aula.dominio;
 
 import java.sql.Date;
 
+
 public class Aula {
+	
+	private int id;
+	private Date horarioInicio;
+	private Date horarioFim;
+	private Date diaDaSemana;
+	private Disciplina disciplina;
+	private Sala sala;
 	
 	public Aula(int parseInt, String horarioInicio2, String horarioFim2,
 			String diaDaSemana2, String disciplina2, String sala2, boolean b) {
@@ -44,11 +52,5 @@ public class Aula {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
-	private int id;
-	private Date horarioInicio;
-	private Date horarioFim;
-	private Date diaDaSemana;
-	private Disciplina disciplina;
-	private Sala sala;
 
 }

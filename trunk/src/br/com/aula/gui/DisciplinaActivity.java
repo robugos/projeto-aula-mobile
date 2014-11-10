@@ -2,9 +2,9 @@ package br.com.aula.gui;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.NavUtils;
@@ -22,14 +22,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.aula.R;
-import br.com.aula.dao.ConexaoHttpClient;
 import br.com.aula.dominio.Curso;
 import br.com.aula.dominio.Disciplina;
+import br.com.aula.negocio.DisciplinaBS;
+import br.com.aula.negocio.FavoritoBS;
 
+@SuppressLint("InflateParams")
 public class DisciplinaActivity extends Activity {
 
 	public Curso curso;
-	public String idCurso, nome, turno;
+	// public String idCurso, nome, turno;
 	public ListAdapter dataAdapter = null;
 
 	@Override
@@ -42,43 +44,58 @@ public class DisciplinaActivity extends Activity {
 		StrictMode.setThreadPolicy(policy);
 
 		getValues();
-		setTitle(this.getTitle() + " - " + nome);
+		setTitle(this.getTitle() + " - " + curso.getNome());
 
-		try {
-			displayListView();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		displayListView();
 
 	}
 
 	public void getValues() {
-		Intent i = this.getIntent();
-		idCurso = i.getStringExtra("idCurso");
-		nome = i.getStringExtra("nome");
-		turno = i.getStringExtra("turno");
+		String idCurso;
+		String nome;
+		String turno;
+		Log.i("disciplinas", "vai pegar o curso");
+		Bundle extras = getIntent().getExtras();
+		if (extras == null) {
+			Log.i("Extras", "Null");
+			idCurso = "1";
+			nome = "";
+			turno = "";
+		} else {
+			Log.i("Extras", "não Null");
+			idCurso = extras.getString("idCurso");
+			Log.i("Extras", idCurso);
+			nome = extras.getString("nome");
+			Log.i("Extras", nome);
+			turno = extras.getString("turno");
+			Log.i("Extras", turno);
+		}
+		Log.i("Extras", nome);
+		curso = new Curso(idCurso, nome, turno, false);
 	}
 
 	private void displayListView() {
 
 		ArrayList<Disciplina> discList = new ArrayList<Disciplina>();
-		//CursoBS cursoBS = new CursoBS();
+		DisciplinaBS discBS = new DisciplinaBS();
 		Log.i("resposta: ", "antes de strings[]");
-		String[] parts = pegarDisciplinas().split(",");
+		String[] parts = discBS.pegarDisciplinas(curso).split(",");
 		Log.i("resposta: ", "depois de strings[]");
 		for (int i = 0; i < parts.length; i++) {
 			String[] c = parts[i].split("#");
 			String id = c[0];
-			Log.i("resposta: ", idCurso);
+			Log.v("idDisciplina", id);
 			String nome = c[1];
-			Log.i("resposta: ", nome);
+			Log.v("nome", nome);
 			String professor = c[2];
-			Log.i("resposta: ", professor);
+			Log.v("professor", professor);
+			if (professor==null) {
+				professor="";
+			}
 			Disciplina disc = new Disciplina(id, nome, curso, professor, false);
 			discList.add(disc);
 		}
-		
+
 		dataAdapter = new ListAdapter(this, R.layout.listview_disciplina,
 				discList);
 		ListView listView = (ListView) findViewById(R.id.listviewDisciplinas);
@@ -97,27 +114,6 @@ public class DisciplinaActivity extends Activity {
 				// chamaCurso(curso);
 			}
 		});
-
-	}
-	
-	public String pegarDisciplinas() {
-
-		String urlGet = "http://150.161.16.233:8080/Aulaweb/listarDisciplinas.jsp?=idCurso="+curso.getIdCurso();
-
-		String resposta = null;
-
-		try {
-			resposta = ConexaoHttpClient.executaHttpGet(urlGet);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.i("erro", " " + e);
-		}
-
-		// mensagemExibir("Login", respostaConvertida);
-
-		// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
-		return resposta;
 
 	}
 
@@ -145,8 +141,7 @@ public class DisciplinaActivity extends Activity {
 			Log.v("ConvertView", String.valueOf(position));
 
 			if (convertView == null) {
-				LayoutInflater vi = (LayoutInflater) DisciplinaActivity.this
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = vi.inflate(R.layout.listview_disciplina, null);
 
 				holder = new ViewHolder();
@@ -162,28 +157,29 @@ public class DisciplinaActivity extends Activity {
 					public void onClick(View v) {
 						CheckBox fav = (CheckBox) v;
 						Disciplina disc = (Disciplina) fav.getTag();
+						FavoritoBS favorito = new FavoritoBS();
 						if (fav.isChecked() == true) {
-							Toast.makeText(DisciplinaActivity.this,
+							favorito.favoritar("disciplina", disc.getId());
+							Toast.makeText(getApplicationContext(),
 									fav.getId() + " agora é um favorito.",
 									Toast.LENGTH_LONG).show();
 						} else {
-							Toast.makeText(DisciplinaActivity.this,
+							favorito.desfavoritar("disciplina", disc.getId());
+							Toast.makeText(getApplicationContext(),
 									fav.getId() + " não é mais um favorito.",
 									Toast.LENGTH_LONG).show();
 						}
 						disc.setSelected(fav.isChecked());
 					}
 				});
-
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			Disciplina disc = discList.get(position);
-			// holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(disc.getNome());
 			holder.professor.setText(disc.getProfessor());
-			//holder.favorito.setId(disc.getId());
+			holder.favorito.setId(disc.getIntId());
 			holder.favorito.setChecked(disc.isSelected());
 			holder.favorito.setTag(disc);
 

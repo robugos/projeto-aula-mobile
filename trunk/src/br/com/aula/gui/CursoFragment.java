@@ -2,6 +2,7 @@ package br.com.aula.gui;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.aula.R;
-import br.com.aula.dao.ConexaoHttpClient;
 import br.com.aula.dominio.Curso;
+import br.com.aula.negocio.CursoBS;
+import br.com.aula.negocio.FavoritoBS;
 
+@SuppressLint("InflateParams")
 public class CursoFragment extends Fragment {
 
 	ListAdapter dataAdapter = null;
@@ -41,9 +44,9 @@ public class CursoFragment extends Fragment {
 	private void displayListView(View view) {
 
 		ArrayList<Curso> cursoList = new ArrayList<Curso>();
-		//CursoBS cursoBS = new CursoBS();
+		CursoBS cursoBS = new CursoBS();
 		Log.i("resposta: ", "antes de strings[]");
-		String[] parts = pegarCursos().split(",");
+		String[] parts = cursoBS.pegarCursos().split(",");
 		Log.i("resposta: ", "depois de strings[]");
 		for (int i = 0; i < parts.length; i++) {
 			String[] c = parts[i].split("#");
@@ -56,18 +59,6 @@ public class CursoFragment extends Fragment {
 			Curso curso = new Curso(idCurso, nome, turno, false);
 			cursoList.add(curso);
 		}
-
-		// Array de todos os cursos
-		/*
-		 * Curso curso = new Curso(1, "Bach. Sistemas de Informação", "Manhã",
-		 * false); cursoList.add(curso); curso = new Curso(2, "Lic. Computação",
-		 * "Noite", true); cursoList.add(curso); curso = new Curso(3,
-		 * "Bach. Ciências da Computação", "Tarde", false);
-		 * cursoList.add(curso); curso = new Curso(4, "Administração", "Manhã",
-		 * true); cursoList.add(curso);
-		 */
-
-		//
 
 		dataAdapter = new ListAdapter(getActivity(), R.layout.listview_curso,
 				cursoList);
@@ -86,27 +77,6 @@ public class CursoFragment extends Fragment {
 				chamaCurso(curso);
 			}
 		});
-
-	}
-
-	public String pegarCursos() {
-
-		String urlGet = "http://150.161.16.233:8080/Aulaweb/listarCursos.jsp";
-
-		String resposta = null;
-
-		try {
-			resposta = ConexaoHttpClient.executaHttpGet(urlGet);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.i("erro", " " + e);
-		}
-
-		// mensagemExibir("Login", respostaConvertida);
-
-		// mensagemExibir("Login", "UsuÃ¡rio vÃ¡lido");
-		return resposta;
 
 	}
 
@@ -150,12 +120,15 @@ public class CursoFragment extends Fragment {
 					public void onClick(View v) {
 						CheckBox fav = (CheckBox) v;
 						Curso curso = (Curso) fav.getTag();
+						FavoritoBS favorito = new FavoritoBS();
 						if (fav.isChecked() == true) {
+							favorito.favoritar("curso", curso.getIdCurso());
 							Toast.makeText(
 									getContext().getApplicationContext(),
 									fav.getId() + " agora é um favorito.",
 									Toast.LENGTH_LONG).show();
 						} else {
+							favorito.desfavoritar("curso", curso.getIdCurso());
 							Toast.makeText(
 									getContext().getApplicationContext(),
 									fav.getId() + " não é mais um favorito.",
@@ -173,7 +146,7 @@ public class CursoFragment extends Fragment {
 			// holder.nome.setText(" (" + curso.getCodCurso() + ")");
 			holder.nome.setText(curso.getNome());
 			holder.turno.setText(curso.getTurno());
-			//holder.favorito.setId(Integer.parseInt(curso.getIdCurso()));
+			holder.favorito.setId(position);
 			holder.favorito.setChecked(curso.isSelected());
 			holder.favorito.setTag(curso);
 
@@ -185,10 +158,16 @@ public class CursoFragment extends Fragment {
 
 	public void chamaCurso(Curso curso) {
 
-		Intent i = new Intent(getActivity().getApplicationContext(), DisciplinaActivity.class);
-		i.putExtra("idCurso", curso.getIdCurso());
-		i.putExtra("nome", curso.getNome());
-		i.putExtra("turno", curso.getTurno());
+		Intent i = new Intent(getActivity(), DisciplinaActivity.class);
+		Bundle bundleCurso = new Bundle();
+		bundleCurso.putString("idCurso", curso.getIdCurso());
+		Log.i("idCurso", curso.getIdCurso());
+		bundleCurso.putString("nome", curso.getNome());
+		Log.i("nome", curso.getNome());
+		bundleCurso.putString("turno", curso.getTurno());
+		Log.i("turno", curso.getTurno());
+		i.putExtras(bundleCurso);
+		Log.i("chamaCurso", "vai mudar de activity");
 		startActivity(i);
 	}
 

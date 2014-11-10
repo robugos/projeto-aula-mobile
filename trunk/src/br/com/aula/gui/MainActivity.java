@@ -14,8 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import br.com.aula.R;
 
-/*import android.view.View;
- import android.widget.ImageButton;*/
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
